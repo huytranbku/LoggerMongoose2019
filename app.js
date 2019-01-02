@@ -1,14 +1,16 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:37017/employee')
-  .then(() =>  console.log('Connection succesful'))
+var defaultConnectionUrl = process.env.MONGODB_URL || 'mongodb://localhost:37017/logger'
+console.log('defaultConnectionUrl: ' + defaultConnectionUrl);
+
+mongoose.connect(defaultConnectionUrl)
+  .then(() => console.log('Connection succesful'))
   .catch((err) => console.error(err));
 
 var index = require('./routes/index');
