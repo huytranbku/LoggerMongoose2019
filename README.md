@@ -1,4 +1,6 @@
-Simple LOGGER with Express JS and Mongoose
+### Simple LOGGER with Express JS and Mongoose ###
+
+![Screenshot](screenshot.png)
 
 *Default port is 8888*
 *Default mongo port is 37017*
