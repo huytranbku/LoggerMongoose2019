@@ -15,6 +15,7 @@
         <span>type <input v-model="type" type="text" value="info"/></span>
         <span>msg <input v-model="msg" type="text" value="HAPPY NEW YEAR 2019"/></span>
         <button v-on:click="log">LOG</button>
+        <button v-on:click="getUsage">Get Usage</button>
       </p>
       <ul id="logs" class="card big color2">
         <div>
@@ -44,6 +45,11 @@
           }
         },
         methods: {
+          getUsage: function (event) {
+            var url = window.location.protocol + "//" + window.location.host + '/logger/save';
+            var usage = "fetch('"+ url +"?type=" + this.type + "&msg=" + this.msg + "')";
+            prompt("Here usage with JS lang", usage);
+          },
           log: function (event) {
             var data={
               msg: this.msg,

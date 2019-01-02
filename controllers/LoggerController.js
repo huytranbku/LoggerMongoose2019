@@ -36,6 +36,17 @@ ctrl.save = function(req, res) {
   });
 };
 
+ctrl.saveFromGet = function(req, res) {
+  var logger = new Logger(req.query);
+  logger.save(function(err, data) {
+    if(err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json(data);
+    }
+  });
+};
+
 // ctrl.update = function(req, res) {
 //   Logger.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }, function (err, line) {
 //     if (err) {
