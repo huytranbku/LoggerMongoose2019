@@ -18,4 +18,16 @@ For production, start server
 =======
 npm start
 
+API usage
+=======
+POST /logger
+{
+  "msg": "message for logging",
+  "type": "info"
+}
+
+GET /logger
+
+Enjoy!
+=======
 Coder huytranbku
