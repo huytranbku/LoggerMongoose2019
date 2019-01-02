@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
 var defaultConnectionUrl = process.env.MONGODB_URL || 'mongodb://localhost:37017/logger'
 console.log('defaultConnectionUrl: ' + defaultConnectionUrl);
 
-mongoose.connect(defaultConnectionUrl)
+mongoose.connect(defaultConnectionUrl, { useMongoClient: true })
   .then(() => console.log('Connection succesful'))
   .catch((err) => console.error(err));
 
