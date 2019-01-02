@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var logger = require("../controllers/LoggerController");
+var logger = require('../controllers/LoggerController');
 
 router.get('/', function(req, res) {
   logger.list(req, res);

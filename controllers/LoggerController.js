@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var Logger = require("../models/Logger");
+var mongoose = require('mongoose');
+var Logger = require('../models/Logger');
 
 var ctrl = {};
 
