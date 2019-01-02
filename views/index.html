@@ -15,10 +15,12 @@
         <span>type <input v-model="type" type="text" value="info"/></span>
         <span>msg <input v-model="msg" type="text" value="HAPPY NEW YEAR 2019"/></span>
         <button v-on:click="log">LOG</button>
-        
       </p>
       <ul id="logs" class="card big color2">
-        <div><button v-on:click="refresh">REFRESH</button></div>
+        <div>
+          <button v-on:click="forceRefresh">REFRESH</button>
+          <span><input type="checkbox" v-model="autoRefresh"> Auto Refresh (every 5s)</span>
+        </div>
         <logs
           v-for="(item, index) in items"
           v-bind:item="item"
@@ -33,7 +35,6 @@
         props: ['item'],
         template: '<li> {{ item.msg }} </li>'
       });
-      
       var vActions = new Vue({
         el: '#actions',
         data: function() {
@@ -63,17 +64,20 @@
           }
         }
       });
-
       var v = new Vue({
         el: '#logs',
         data: function () {
           return {
-            items: []
+            items: [],
+            autoRefresh: false,
           }
         },
         methods: {
-          refresh: function (event) {
+          forceRefresh: function (event) {
             if (refreshLog) { refreshLog(); }
+          },
+          refresh: function (event) {
+            if (refreshLog && this.autoRefresh) { refreshLog(); }
           },
         }
       });
@@ -93,6 +97,8 @@
           }, 1000);
         });
       };
+
+      setInterval(function() { v.refresh(); }, 5000);
     </script>
   </body>
 </html>
