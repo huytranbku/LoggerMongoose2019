@@ -3,17 +3,18 @@
 ![Screenshot](screenshot.png)
 
 *Default port is 8888*
+
 *Default mongo port is 37017*
 
-_Install
+Install
 =======
 npm start
 
-_For developer, run:
+For developer, start server
 =======
 npm run start:dev
 
-_For producttion, run:
+For production, start server
 =======
 npm start
 
