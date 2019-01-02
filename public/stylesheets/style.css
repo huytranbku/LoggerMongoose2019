@@ -1,3 +1,42 @@
-body {
-  background-color: #eee;
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.center {
+  text-align: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow:2px 2px 5px #828282;
+}
+
+.small {
+  max-width: 300px;
+  min-height: 200px;
+}
+
+.big {
+  padding: 20px;
+}
+
+.color1 {
+  color: white;
+  background: #FDC830;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.color2 {
+  color: white;
+  background: #BE93C5;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #7BC6CC, #BE93C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

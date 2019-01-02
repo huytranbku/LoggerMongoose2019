@@ -2,8 +2,97 @@
   <head>
     <title>HAPPY NEW YEAR 2019</title>
     <link rel="stylesheet" href="stylesheets/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js"></script>
   </head>
   <body>
-    HAPPY NEW YEAR 2019
+    <div class="container">
+      <a href="https://github.com/huytranbku/LoggerMongoose2019">
+        <h3 class="center">
+            huytranbku/LoggerMongoose2019
+        </h3>
+      </a>
+      <p id="actions" class="center card small color1">
+        <span>type <input v-model="type" type="text" value="info"/></span>
+        <span>msg <input v-model="msg" type="text" value="HAPPY NEW YEAR 2019"/></span>
+        <button v-on:click="log">LOG</button>
+        
+      </p>
+      <ul id="logs" class="card big color2">
+        <div><button v-on:click="refresh">REFRESH</button></div>
+        <logs
+          v-for="(item, index) in items"
+          v-bind:item="item"
+          v-bind:index="index"
+          v-bind:key="index"
+        ></logs>
+      </ul>
+    </div>
+
+    <script>
+      Vue.component('logs', {
+        props: ['item'],
+        template: '<li> {{ item.msg }} </li>'
+      });
+      
+      var vActions = new Vue({
+        el: '#actions',
+        data: function() {
+          return {
+            type: 'info',
+            msg: 'HAPPY NEW YEAR 2019',
+          }
+        },
+        methods: {
+          log: function (event) {
+            var data={
+              msg: this.msg,
+              type: this.type
+            };
+            fetch('/logger', {
+              method: "POST",
+              mode: "cors",
+              cache: "no-cache",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              redirect: "follow", // manual, *follow, error
+              referrer: "no-referrer", // no-referrer, *client
+              body: JSON.stringify(data), // body data type must match "Content-Type" header
+              });
+          }
+        }
+      });
+
+      var v = new Vue({
+        el: '#logs',
+        data: function () {
+          return {
+            items: []
+          }
+        },
+        methods: {
+          refresh: function (event) {
+            if (refreshLog) { refreshLog(); }
+          },
+        }
+      });
+      
+      function refreshLog() {
+        v.items = [{msg: 'Loading...'}];
+        fetch('/logger')
+        .then(res => res.json())
+        .then(function(data) {
+          var result = data.map((e) => {
+            var time = (new Date(e.at).toLocaleDateString()) + ' ' + (new Date(e.at).toLocaleTimeString());
+            var msg = time + ' [ ' + e.type + ' ] ' + e.msg;
+            return {msg};
+          });
+          setTimeout(function() {
+            v.items = result;
+          }, 1000);
+        });
+      };
+    </script>
   </body>
 </html>
