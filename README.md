@@ -26,6 +26,8 @@ POST /logger
   "type": "info"
 }
 
+or GET /logger/save?type=info&msg=message
+
 GET /logger
 
 Enjoy!
