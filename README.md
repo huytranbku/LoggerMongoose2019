@@ -6,6 +6,11 @@
 
 *Default mongo port is 37017*
 
+Docker
+=======
+cd docker
+docker-compose up -d
+
 Install
 =======
 npm start

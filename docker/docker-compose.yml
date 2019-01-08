@@ -1,0 +1,31 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo-container
+    volumes:
+      - ~/database:/data/db
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+  backend:
+    build:
+        context: ../
+    image: backend
+    container_name: backend-container
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    environment:
+      WAIT_HOSTS: mongo:27017
+      MONGODB_URL: mongodb://mongo:27017/logger
+  nginx:
+    image: nginx
+    ports:
+      - 8888:8888
+    container_name: nginx-container
+    links:
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
